@@ -1,0 +1,10 @@
+.ItemsView ul>li {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.ItemsView ul>li:hover {
+    background-color: blueviolet;
+}
+
+

@@ -1,38 +1,98 @@
-.App {
+:root {
+  --dark-green: #007c77;
+  --green: #00b8b1;
+  --turquoise: #00e5e8;
+  --light-turquoise: #54ebee;
+  --light: #f0f600;
+  --pink: #ff3cc7;
+  --purple: #4c1a57;
+  --red: #b6174b;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.center {
+ 
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  font-family:'Courier New', Courier, monospace;
+  font-size: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App h1 {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 100px;
+  text-shadow: 5px 15px 5px rgb(207, 207, 207);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App h1::first-letter{
+  color: var(--dark-green);
+  font-size: 140px;
+  font-style: italic;
+  float: none;
+  vertical-align: -15px;
 }
 
-.App-link {
-  color: #61dafb;
+.App h2 {
+  font-size: 40px;
+  margin-bottom: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App h3 {
+  margin-bottom: 20px;
 }
+
+.App em {
+  background-color: var(--light-turquoise);
+  color: var(--purple);
+  font-weight: 600;
+}
+
+.App p {
+  margin-bottom: 5px;
+}
+
+.App Button {
+  margin-block: 20px;
+  font-size: 20px;
+}
+
+.App span {
+  font-style: italic;
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.select:hover {
+  background-color: var(--pink);
+  color: var(--light);
+}
+
+.App .warning {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.App .neutral {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.App footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+
+
