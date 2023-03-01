@@ -13,6 +13,34 @@ This assessment tests your understanding of building a full stack app using Reac
 
 - Access the MySQL interface in your terminal by running `mysql -u root -p`
 - Create a new database called your_db_title: `create database your_db_title`
+- Create a table called 'food_emi_data' in your your_db_title database
+- Import the data from the dataset .csv from the data folder:
+
+    DROP TABLE IF EXISTS food_emi_data;
+    CREATE TABLE food_emi_data (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    food_item VARCHAR(200),
+    emi_kg DECIMAL(6, 1),
+    emi_port DECIMAL(6, 1),
+    food_cat VARCHAR(200)
+    );
+
+    LOAD DATA LOCAL INFILE './footprints_clean.csv'   /*use correct path to location where you store this file*/
+    INTO TABLE food_emi_data
+    FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    -- skip the first row with labels
+    IGNORE 1 ROWS
+    -- assign the data to these two columns
+    (country, pay_gap);
+    
+- If you see the following error when you try to import…
+    ERROR 3948 (42000) at line 21: Loading local data is disabled; this must be enabled on both the client and server sides
+
+  …then type this in the MySQL CLI and try again:
+    set global local_infile = true;
+
+
 - Add a `.env` file to the project folder of this repository containing the MySQL authentication information for MySQL user. For example:
 
 ```bash
@@ -21,8 +49,6 @@ This assessment tests your understanding of building a full stack app using Reac
   DB_NAME=foodPrint
   DB_PASS=root
 ```
-
-- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create a table called 'food_emi_data' in your database.
 
 - Make sure you understand how the `food_emi_data` table is constructed. In your MySQL console, you can run `use your_db_title;` and then `describe food_emi_data;` to see the structure of the food_emi_data table.
 
