@@ -35,6 +35,7 @@ This assessment tests your understanding of building a full stack app using Reac
     (country, pay_gap);
     
 - If you see the following error when you try to import…
+
     ERROR 3948 (42000) at line 21: Loading local data is disabled; this must be enabled on both the client and server sides
 
   …then type this in the MySQL CLI and try again:
