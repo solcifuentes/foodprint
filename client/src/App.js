@@ -108,6 +108,7 @@ function App() {
   //my JSX
   return (
     <Container className="App">
+      <div className="main">
 
       <Row className="center">
           <Col ><h1 >FoodPrint</h1></Col>
@@ -119,13 +120,17 @@ function App() {
           <Col><h3>Make <em>&nbsp;informed food choices&nbsp;</em> and <em>&nbsp;decrease 
             your carbon footprint!&nbsp;</em></h3></Col>
       </Row>
-      <Row className="center">
+      <Row className="center" style={{ alignItems: "center"}}>
+          <Col xs={1}><p style={{ fontSize: 150}}>{"{"}</p>
+          </Col>
           <Col>
               <p>A quarter of the global greenhouse gas emissions comes from food.<br/> 
               This means across all stages of the production: The supply chain starts with changes 
               to land for pastures or farming are made, then includes farming itself, processing, 
               transport, as well as retail and packaging.  
               </p>
+          </Col>
+          <Col xs={1}><p style={{ fontSize: 150 }}>{"}"}</p>
           </Col>
       </Row>
       <Row className="center">
@@ -138,53 +143,27 @@ function App() {
           </Col>
       </Row>
       <Row>
-            <Col>
-                  {(foodprint >= 0.5) &&
-                        <div>
-                            <p className="warning">👎🏾👎🏻👎🏽&nbsp;Oups, looks like your choices are quite high in emissions... 
-                            </p> 
-                            <p> 
-                              Did you know that in order to reach the Paris Agreement goal, 
-                              our meals should emit no more than 0.5kg CO2eq on average? 
-                            </p>
-                        </div>
-                        
-                    }
-              </Col>
-              <Col>
-                  {(foodprint >= 0.5) &&
-                          <div>
-                              <p className="neutral">👍🏿👍🏻👍🏽&nbsp;Challenge yourself?! <br/> Mix it up with these random picks, which  
-                              are all low in emissions:</p>
-                              <ul>
-                                  {randomItems.map(item => (
-                                    <li key={item.food_item}>
-                                      Fancy {item.food_item}? Emissions are {item.emi_port}kg of CO2eq only!
-                                    </li>
-                                  ))}
-                              </ul>
-                          </div>
-                    }
-              </Col>
-      </Row>
-      <Row>
           <Col xs={3}>
             <p style={{fontWeight: 600}} >What's on your plate?</p>
             <ul>
                         {selection.map(item => 
-                            <li key={item}>
+                            <li key={item} style={{ color: 'blueviolet' }}>
                                 {item}
                             </li>
                         )}
             </ul>
             <p>Your food choices for today produce 
-              <br/><span className={(foodprint >= 0.5 ? 'warning' : 'neutral' )}>&nbsp;{+foodprint.toFixed(2)}kg</span> of CO2eq*.</p>
+              <br/><span className={(foodprint > 0.5 ? 'warning' : 'neutral' )}>&nbsp;{+foodprint.toFixed(2)}kg</span> of CO2eq*.</p>
 
                 <Button onClick={reset} variant="outline-success">Empty my plate!</Button>
           </Col>
           <Col>
                 <Routes>
-                  <Route path="/cats/:active?" element={<CatView foodCats={foodCats} />}>
+                  <Route path="/cats/:active?" element={<CatView 
+                              foodCats={foodCats} 
+                              foodprint={foodprint}
+                              randomItems={randomItems}
+                              />}>
                         <Route path=":key" element={<ItemsView 
                               foodEmis={foodEmis} 
                               handleIncrementCb={value => handleIncrement(value)}
@@ -195,15 +174,18 @@ function App() {
               </Routes> 
           </Col>
       </Row>
-      
-    <footer>
+
+    </div>
+
+    <footer className="footer">
       <Row>
           <Col>
+          <br/><br/><br/>
           <small>*Emissions are measured in carbon dioxide equivalents. This means non-CO2 gases are 
-            weighted by the amount of warming they causeover a 100-year timescale. Calculations are 
-            simplified by assuming portion sizes of 250g, 100g for oils, fats, nuts and seeds and 
-            disreagrding the origin of the food items.<br/>
-          Based on data by <Link to='https://ourworldindata.org/food-choice-vs-eating-local'>
+            weighted by the amount of warming they cause over a 100-year timescale. Calculations are 
+            simplified by assuming portion sizes of 250g, 100g for oils, fats, nuts and seeds and by
+            disregarding the origin of the food items.<br/>
+          Based on data by <Link to='https://ourworldindata.org/food-choice-vs-eating-local' target="_blank">
             Our World In Data is a project of the Global Change Data Lab</Link></small>
           </Col>
       </Row>

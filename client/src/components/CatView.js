@@ -46,7 +46,37 @@ function filterCats(arr, query) {
   return (
     <Container className='CatView'>
         <Row>
-                <Col>
+            <Col sm={12} md={6}>
+                  {(props.foodprint > 0.5) &&
+                        <div>
+                            <p className="warning">👎🏾👎🏻👎🏽&nbsp;Oups, looks like your choices are quite high in emissions... 
+                            </p> 
+                            <p> 
+                              Did you know that in order to reach the Paris Agreement goal, 
+                              our meals should emit no more than 0.5kg CO2eq on average? 
+                            </p>
+                        </div>
+                        
+                    }
+              </Col>
+              <Col sm={12} md={6}>
+                  {(props.foodprint > 0.5) &&
+                          <div>
+                              <p className="neutral">👍🏿👍🏻👍🏽&nbsp;Challenge yourself?! <br/> Mix it up with these random picks, which  
+                              are all low in emissions:</p>
+                              <ul>
+                                  {props.randomItems.map(item => (
+                                    <li key={item.food_item} style={{ cursor: 'text' }}>
+                                      Fancy {item.food_item}? Emissions are {item.emi_port}kg of CO2eq only!
+                                    </li>
+                                  ))}
+                              </ul>
+                          </div>
+                    }
+              </Col>
+      </Row>
+        <Row>
+                <Col sm={12} md={6}>
                     <h2 onClick={() =>  setActive("menu")}>
                         I'm lazy today, <br/>&emsp;&emsp;&emsp;show me the <em>menu</em>!
                     </h2>
@@ -77,7 +107,7 @@ function filterCats(arr, query) {
                         </Col>
                     </Row>
                 </Col>
-                <Col>
+                <Col sm={12} md={6}>
                     <h2 onClick={() =>  setActive("diy")}>
                         I'm going DIY, these<br/>&emsp;&emsp;&emsp; are my <em>ingredients</em>
                     </h2>
@@ -111,7 +141,7 @@ function filterCats(arr, query) {
                 </Col>
         </Row>
         <Row>
-                <Col>
+                <Col sm={12} md={6}>
                     <h2 onClick={() => setActive("bev")}>
                         I'm thirsty, as well! <br/>&emsp;&emsp;&emsp;&emsp;Any <em>drinks</em>?
                     </h2>
@@ -145,7 +175,7 @@ function filterCats(arr, query) {
 
                         
                 </Col>
-                <Col>
+                <Col sm={12} md={6}>
                     <h2 onClick={() => setActive("alc")}>
                         Cheers, <em>salud</em>, santé, <br/>&emsp;&emsp;&emsp;&emsp;<nobr>skol, chin-chin!</nobr>
                     </h2>
