@@ -31,6 +31,10 @@ export default function SearchBar(props) {
     console.log("search term: ", searchTerm);
   };
 
+  //   const filterMenuItems = () => {
+  //     foodEmis
+
+  //   }
   return (
     <div>
       <Form
@@ -43,7 +47,12 @@ export default function SearchBar(props) {
             title="Food Categories"
             id="input-group-dropdown-1"
           >
-            <Dropdown.Item href="#">Menu</Dropdown.Item>
+            <Dropdown.Item
+              href="#"
+              // onclick={filterMenuItems}
+            >
+              Menu
+            </Dropdown.Item>
             <Dropdown.Item href="#">Ingredients</Dropdown.Item>
             <Dropdown.Item href="#">Drinks</Dropdown.Item>
             <Dropdown.Item href="#">Alcohol</Dropdown.Item>
@@ -74,7 +83,6 @@ export default function SearchBar(props) {
             .map((item) => (
               <div
                 key={item.id}
-                // onSubmit={() => handleSubmit(item)}
                 className="dropdown-row"
                 onClick={() => {
                   onSearch(item.food_item);

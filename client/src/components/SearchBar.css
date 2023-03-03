@@ -6,3 +6,7 @@
 /* .search-container {
   display: grid;
 } */
+
+.input-group {
+  display: inline;
+}

@@ -7,14 +7,14 @@
   --pink: #ff3cc7;
   --purple: #4c1a57;
   --red: #b6174b;
-
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -23,19 +23,19 @@ html, body {
 }
 
 .App {
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 20px;
 }
 
 .App h1 {
   margin-top: 60px;
   margin-bottom: 40px;
-  font-family:'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 100px;
   text-shadow: 5px 15px 5px rgb(207, 207, 207);
 }
 
-.App h1::first-letter{
+.App h1::first-letter {
   color: var(--dark-green);
   font-size: 140px;
   font-style: italic;
@@ -95,8 +95,3 @@ html, body {
 .App footer {
   flex-shrink: 0;
 }
-
-
-
-
-
