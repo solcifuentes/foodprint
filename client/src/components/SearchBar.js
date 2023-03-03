@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./SearchBar.css";
-import Select from "react-select";
 
 export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
@@ -17,7 +16,7 @@ export default function SearchBar(props) {
     setInputValue(event.target.value);
   };
 
-  //HANDLE SUBMIT-search
+  //HANDLE SUBMIT
   const handleSubmit = (event) => {
     event.preventDefault();
     handleIncrementCb(selectedFoodObj.emi_port);
@@ -26,6 +25,7 @@ export default function SearchBar(props) {
     setSelectedFoodObj(null);
   };
 
+  //COMPLETE THE SEARCH BAR
   const onSearch = (searchTerm) => {
     setInputValue(searchTerm);
     console.log("search term: ", searchTerm);
