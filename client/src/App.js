@@ -160,8 +160,8 @@ function App() {
               handleIncrementCb={(value) => handleIncrement(value)}
               showSelectionCb={(item) => showSelection(item)}
             />
-            <Button onClick={reset} variant="success">
-              <Link
+            {/* <Button onClick={reset} variant="success"> */}
+            {/* <Link
                 to="/cats"
                 style={{
                   textDecoration: "none",
@@ -170,8 +170,8 @@ function App() {
                 }}
               >
                 Let's get started!
-              </Link>
-            </Button>
+              </Link> */}
+            {/* </Button> */}
           </Col>
         </Row>
         <Row>
@@ -198,7 +198,7 @@ function App() {
             </Button>
           </Col>
           <Col>
-            <Routes>
+            {/* <Routes>
               <Route
                 path="/cats/:active?"
                 element={
@@ -220,7 +220,7 @@ function App() {
                   }
                 />
               </Route>
-            </Routes>
+            </Routes> */}
           </Col>
         </Row>
       </div>

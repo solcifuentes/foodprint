@@ -10,6 +10,7 @@ import Select from "react-select";
 export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
   const { foodEmis, handleIncrementCb, showSelectionCb } = props;
+  const [selectedFoodObj, setSelectedFoodObj] = useState(null);
 
   //HANDLE INPUT VALUE
   const handleChange = (event) => {
@@ -19,9 +20,10 @@ export default function SearchBar(props) {
   //HANDLE SUBMIT-search
   const handleSubmit = (event) => {
     event.preventDefault();
-    //setInputValue(searchTerm)
-    console.log(inputValue);
+    handleIncrementCb(selectedFoodObj.emi_port);
+    showSelectionCb(selectedFoodObj.food_item);
     setInputValue("");
+    setSelectedFoodObj(null);
   };
 
   const onSearch = (searchTerm) => {
@@ -35,19 +37,28 @@ export default function SearchBar(props) {
         className="search-container"
         onSubmit={(event) => handleSubmit(event)}
       >
-        <Form.Label className="search-inner">
-          <Form.Control
-            type="text"
-            name="searchInput"
-            placeholder="Find your food..."
-            value={inputValue}
-            onChange={handleChange}
-          />
-          <Button className="search-button" type="submit" variant="success">
-            {" "}
-            Search{" "}
-          </Button>
-        </Form.Label>
+        <InputGroup className="mb-3">
+          <DropdownButton
+            variant="success"
+            title="Food Categories"
+            id="input-group-dropdown-1"
+          >
+            <Dropdown.Item href="#">Menu</Dropdown.Item>
+            <Dropdown.Item href="#">Ingredients</Dropdown.Item>
+            <Dropdown.Item href="#">Drinks</Dropdown.Item>
+            <Dropdown.Item href="#">Alcohol</Dropdown.Item>
+          </DropdownButton>
+          <Form.Label className="search-inner">
+            <Form.Control
+              type="text"
+              name="searchInput"
+              placeholder="Find your food..."
+              value={inputValue}
+              onChange={handleChange}
+            />
+          </Form.Label>
+        </InputGroup>
+
         <div className="dropdown">
           {foodEmis
             .filter((item) => {
@@ -63,22 +74,21 @@ export default function SearchBar(props) {
             .map((item) => (
               <div
                 key={item.id}
-                onSubmit={() => handleSubmit(item)}
+                // onSubmit={() => handleSubmit(item)}
                 className="dropdown-row"
-                //I want that onClick it autocompletes the input
-
-                onClick={
-                  () => onSearch(item.food_item)
-                  // {
-                  //   handleIncrementCb(item.emi_port);
-                  //   showSelectionCb(item.food_item);
-                  // }
-                }
+                onClick={() => {
+                  onSearch(item.food_item);
+                  setSelectedFoodObj(item);
+                }}
               >
                 {item.food_item}
               </div>
             ))}
         </div>
+        <Button className="search-button" type="submit" variant="success">
+          {" "}
+          Search{" "}
+        </Button>
       </Form>
     </div>
   );
