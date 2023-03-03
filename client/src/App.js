@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import SearchBar from "./components/SearchBar";
+import Api from "./Api.js";
 
 function App() {
   //my state
@@ -20,59 +21,59 @@ function App() {
   const [randomItems, setRandomItems] = useState([]);
 
   //my functions
-  useEffect(() => {
-    getFoodEmis();
-    getFoodCats();
-    getCondItems();
-  }, []);
+  // useEffect(() => {
+  //   getFoodEmis();
+  //   getFoodCats();
+  //   getCondItems();
+  // }, []);
 
   useEffect(() => {
     selectRandomItems();
   }, [condItems]);
 
-  async function getFoodEmis() {
-    try {
-      let response = await fetch("/api"); //which path do I use here?
-      if (response.ok) {
-        let foodEmis = await response.json();
-        // console.log("food emissions:", foodEmis);
-        setFoodEmis(foodEmis);
-      } else {
-        console.log(`Server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
-  }
+  // async function getFoodEmis() {
+  //   try {
+  //     let response = await fetch("/api"); //which path do I use here?
+  //     if (response.ok) {
+  //       let foodEmis = await response.json();
+  //       // console.log("food emissions:", foodEmis);
+  //       setFoodEmis(foodEmis);
+  //     } else {
+  //       console.log(`Server error: ${response.status} ${response.statusText}`);
+  //     }
+  //   } catch (err) {
+  //     console.log(`Server error: ${err.message}`);
+  //   }
+  // }
 
-  async function getFoodCats() {
-    try {
-      let response = await fetch("/api/cat");
-      if (response.ok) {
-        let foodCats = await response.json();
-        setFoodCats(foodCats);
-      } else {
-        console.log(`Server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
-  }
+  // async function getFoodCats() {
+  //   try {
+  //     let response = await fetch("/api/cat");
+  //     if (response.ok) {
+  //       let foodCats = await response.json();
+  //       setFoodCats(foodCats);
+  //     } else {
+  //       console.log(`Server error: ${response.status} ${response.statusText}`);
+  //     }
+  //   } catch (err) {
+  //     console.log(`Server error: ${err.message}`);
+  //   }
+  // }
 
-  async function getCondItems() {
-    try {
-      let response = await fetch("/api/cond");
-      if (response.ok) {
-        let condItems = await response.json();
-        // console.log(condItems);
-        setCondItems(condItems);
-      } else {
-        console.log(`Server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
-  }
+  // async function getCondItems() {
+  //   try {
+  //     let response = await fetch("/api/cond");
+  //     if (response.ok) {
+  //       let condItems = await response.json();
+  //       // console.log(condItems);
+  //       setCondItems(condItems);
+  //     } else {
+  //       console.log(`Server error: ${response.status} ${response.statusText}`);
+  //     }
+  //   } catch (err) {
+  //     console.log(`Server error: ${err.message}`);
+  //   }
+  // }
 
   function handleIncrement(value) {
     setFoodprint((foodprint) => foodprint + value);
@@ -114,6 +115,11 @@ function App() {
   //my JSX
   return (
     <Container className="App">
+      <Api
+        setFoodEmis={setFoodEmis}
+        setFoodCats={setFoodCats}
+        setCondItems={setCondItems}
+      />
       <div className="main">
         <Row className="center">
           <Col>

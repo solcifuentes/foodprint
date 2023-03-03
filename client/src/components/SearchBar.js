@@ -41,13 +41,15 @@ export default function SearchBar(props) {
         className="search-container"
         onSubmit={(event) => handleSubmit(event)}
       >
-        <InputGroup className="mb-3">
+        <InputGroup size="m" className="mb-3">
           <DropdownButton
             variant="success"
             title="Food Categories"
             id="input-group-dropdown-1"
           >
             <Dropdown.Item
+              //maybe it's {menu} or selecteditem is a piece of state
+              value="menu"
               href="#"
               // onclick={filterMenuItems}
             >
@@ -59,6 +61,7 @@ export default function SearchBar(props) {
           </DropdownButton>
           <Form.Label className="search-inner">
             <Form.Control
+              size="lg"
               type="text"
               name="searchInput"
               placeholder="Find your food..."
