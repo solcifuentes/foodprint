@@ -2,8 +2,6 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-
-
 ## Setup
 
 ### Dependencies
@@ -28,7 +26,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - Make sure you understand how the food_emi_data table is constructed. In your MySQL console, you can run use your_db_title; and then describe food_emi_data; to see the structure of the food_emi_data table.
 
-
 ### Development
 
 - Run `npm start` in project directory to start the Express server on port 5000
@@ -41,6 +38,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Styling: general styling, fix in-line styling, "heavy footer"
 - Customize backend data: Make portions adjustable by the user
 
+### Search bar
 
-
-
+-

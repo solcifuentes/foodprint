@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import InputGroup from "react-bootstrap/InputGroup";
 
 export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
@@ -27,44 +31,46 @@ export default function SearchBar(props) {
   //     // return foodFinder.startsWith(inputValue);
   //   };
   return (
-    <form
-      className="search-container"
-      onSubmit={(event) => handleSubmit(event)}
-    >
-      <div className="search-inner">
-        <input
-          type="text"
-          name="searchInput"
-          placeholder="Search..."
-          value={inputValue}
-          onChange={handleChange}
-        />
-        <button className="search-button" type="submit">
-          {" "}
-          Search{" "}
-        </button>
-      </div>
-      <div className="dropdown">
-        {foodEmis
-          .filter((item) => {
-            const foodLowerCase = item.food_item.toLowerCase();
-            return (
-              inputValue &&
-              foodLowerCase.startsWith(inputValue) &&
-              foodLowerCase !== inputValue
-            );
-          })
-          .slice(0, 10)
-          .map((item) => (
-            <div
-              key={item.id}
-              onSubmit={() => handleSubmit(item.food_item)}
-              className="dropdown-row"
-            >
-              {item.food_item}
-            </div>
-          ))}
-      </div>
-    </form>
+    <div>
+      <Form
+        className="search-container"
+        onSubmit={(event) => handleSubmit(event)}
+      >
+        <Form.Label className="search-inner">
+          <Form.Control
+            type="text"
+            name="searchInput"
+            placeholder="Find your food..."
+            value={inputValue}
+            onChange={handleChange}
+          />
+          <Button className="search-button" type="submit" variant="success">
+            {" "}
+            Search{" "}
+          </Button>
+        </Form.Label>
+        <div className="dropdown">
+          {foodEmis
+            .filter((item) => {
+              const foodLowerCase = item.food_item.toLowerCase();
+              return (
+                inputValue && foodLowerCase.startsWith(inputValue)
+                //   &&
+                //   foodLowerCase !== inputValue
+              );
+            })
+            .slice(0, 10)
+            .map((item) => (
+              <div
+                key={item.id}
+                onSubmit={() => handleSubmit(item.food_item)}
+                className="dropdown-row"
+              >
+                {item.food_item}
+              </div>
+            ))}
+        </div>
+      </Form>
+    </div>
   );
 }
