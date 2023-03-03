@@ -4,32 +4,31 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
+import "./SearchBar.css";
+import Select from "react-select";
 
 export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
-  const { foodEmis } = props;
+  const { foodEmis, handleIncrementCb, showSelectionCb } = props;
 
   //HANDLE INPUT VALUE
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  //HANDLE SUBMIT
+  //HANDLE SUBMIT-search
   const handleSubmit = (event) => {
     event.preventDefault();
-    // searchFood()
+    //setInputValue(searchTerm)
     console.log(inputValue);
     setInputValue("");
   };
 
-  //SEARCH TERM INTO THE DB
-  //   const searchFood = () => {
-  //     const foodFinder = foodEmis.map((item)=> {
+  const onSearch = (searchTerm) => {
+    setInputValue(searchTerm);
+    console.log("search term: ", searchTerm);
+  };
 
-  //     });
-  //     console.log(foodFinder);
-  //     // return foodFinder.startsWith(inputValue);
-  //   };
   return (
     <div>
       <Form
@@ -52,9 +51,10 @@ export default function SearchBar(props) {
         <div className="dropdown">
           {foodEmis
             .filter((item) => {
+              const searchTerm = inputValue.toLowerCase();
               const foodLowerCase = item.food_item.toLowerCase();
               return (
-                inputValue && foodLowerCase.startsWith(inputValue)
+                searchTerm && foodLowerCase.startsWith(searchTerm)
                 //   &&
                 //   foodLowerCase !== inputValue
               );
@@ -63,8 +63,17 @@ export default function SearchBar(props) {
             .map((item) => (
               <div
                 key={item.id}
-                onSubmit={() => handleSubmit(item.food_item)}
+                onSubmit={() => handleSubmit(item)}
                 className="dropdown-row"
+                //I want that onClick it autocompletes the input
+
+                onClick={
+                  () => onSearch(item.food_item)
+                  // {
+                  //   handleIncrementCb(item.emi_port);
+                  //   showSelectionCb(item.food_item);
+                  // }
+                }
               >
                 {item.food_item}
               </div>

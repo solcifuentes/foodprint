@@ -155,7 +155,11 @@ function App() {
         </Row>
         <Row className="center">
           <Col>
-            <SearchBar foodEmis={foodEmis} />
+            <SearchBar
+              foodEmis={foodEmis}
+              handleIncrementCb={(value) => handleIncrement(value)}
+              showSelectionCb={(item) => showSelection(item)}
+            />
             <Button onClick={reset} variant="success">
               <Link
                 to="/cats"
