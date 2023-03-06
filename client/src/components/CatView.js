@@ -8,43 +8,42 @@ import Col from "react-bootstrap/Col";
 export default function CatView(props) {
   //   console.log("props CatView: ", props);
 
-  const { active } = useParams();
-  const navigate = useNavigate();
+  //   const { active } = useParams();
+  //   const navigate = useNavigate();
 
-  function setActive(value) {
-    navigate(`/cats/${value}`);
-  }
+  //   function setActive(value) {
+  //     navigate(`/cats/${value}`);
+  //   }
 
-  const dictionary = {
-    MENU_des: "deserts",
-    MENU_fish: "fish options",
-    MENU_meat: "meat options",
-    MENU_veg: "vegan/vegetarian options",
-    DIY_bf: "breakfast ingredients",
-    DIY_bread: "bread",
-    DIY_chee: "cheeses",
-    DIY_eggs: "eggs",
-    DIY_fat: "oils, fats etc.",
-    DIY_fish: "fish",
-    DIY_fruit: "fruits",
-    DIY_meat: "meat",
-    DIY_nut: "nuts & seeds",
-    DIY_pasta: "pasta & rice",
-    DIY_plantb: "vegan/vegetarian alternatives",
-    DIY_swee: "sweets & snacks",
-    DIY_veg: "vegetables & legumes",
-    BEV: "beverages",
-    ALC: "alcoholic drinks",
-  };
+  //   const dictionary = {
+  //     MENU_des: "deserts",
+  //     MENU_fish: "fish options",
+  //     MENU_meat: "meat options",
+  //     MENU_veg: "vegan/vegetarian options",
+  //     DIY_bf: "breakfast ingredients",
+  //     DIY_bread: "bread",
+  //     DIY_chee: "cheeses",
+  //     DIY_eggs: "eggs",
+  //     DIY_fat: "oils, fats etc.",
+  //     DIY_fish: "fish",
+  //     DIY_fruit: "fruits",
+  //     DIY_meat: "meat",
+  //     DIY_nut: "nuts & seeds",
+  //     DIY_pasta: "pasta & rice",
+  //     DIY_plantb: "vegan/vegetarian alternatives",
+  //     DIY_swee: "sweets & snacks",
+  //     DIY_veg: "vegetables & legumes",
+  //     BEV: "beverages",
+  //     ALC: "alcoholic drinks",
+  //   };
 
   //my functions
-  function filterCats(arr, query) {
-    return arr.filter((cat) =>
-      cat.food_cat.toLowerCase().includes(query.toLowerCase())
-    );
-  }
+  //   function filterCats(arr, query) {
+  //     return arr.filter((cat) =>
+  //       cat.food_cat.toLowerCase().includes(query.toLowerCase())
+  //     );
+  //   }
 
-  //my JSX
   return (
     <Container className="CatView">
       <Row>

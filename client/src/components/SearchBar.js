@@ -11,6 +11,30 @@ export default function SearchBar(props) {
   const { foodEmis, handleIncrementCb, showSelectionCb } = props;
   const [selectedFoodObj, setSelectedFoodObj] = useState(null);
   const [active, setActive] = useState(true);
+  const [dropdown, setDropdown] = useState(false);
+
+  // DICTIONARY
+  const dictionary = {
+    MENU_des: "deserts",
+    MENU_fish: "fish options",
+    MENU_meat: "meat options",
+    MENU_veg: "vegan/vegetarian options",
+    DIY_bf: "breakfast ingredients",
+    DIY_bread: "bread",
+    DIY_chee: "cheeses",
+    DIY_eggs: "eggs",
+    DIY_fat: "oils, fats etc.",
+    DIY_fish: "fish",
+    DIY_fruit: "fruits",
+    DIY_meat: "meat",
+    DIY_nut: "nuts & seeds",
+    DIY_pasta: "pasta & rice",
+    DIY_plantb: "vegan/vegetarian alternatives",
+    DIY_swee: "sweets & snacks",
+    DIY_veg: "vegetables & legumes",
+    BEV: "beverages",
+    ALC: "alcoholic drinks",
+  };
 
   //HANDLE INPUT VALUE
   const handleChange = (event) => {
@@ -29,30 +53,26 @@ export default function SearchBar(props) {
   //COMPLETE THE SEARCH BAR
   const onSearch = (searchTerm) => {
     setInputValue(searchTerm);
-
-    console.log("search term: ", searchTerm);
   };
 
-  //   const filterMenuItems = () => {
-
-  //   filterCats(props.foodCats, "diy").map((cat) => (
-  //       <li key={cat.food_cat}>
-  //         <Link
-  //           to={cat.food_cat}
-  //           style={{
-  //             textDecoration: "none",
-  //             color: "#1c5253",
-  //             fontWeight: "bold",
-  //           }}
-  //         >
-  //           {dictionary[cat.food_cat]}
-  //         </Link>
-  //       </li>
-  //     ))
-
-  //     foodEmis
-
+  //FILTER CATS
+  //   function filterCats(arr, query) {
+  //     return arr.filter((cat) =>
+  //       cat.food_cat.toLowerCase().includes(query.toLowerCase())
+  //     );
   //   }
+
+  //FILTER MENU ITEMS
+  const filterMenuItems = (query) => {
+    const menuItems = foodEmis.foodCats.filter((cat) =>
+      cat.food_cat.toLowerCase().includes(query.toLowerCase())
+    );
+    return menuItems;
+
+    // filterCats(foodEmis.foodCats, "menu").map((cat) => (
+    //     <li key={cat.food_cat}>{dictionary[cat.food_cat]}</li>
+    //   ));
+  };
 
   return (
     <div>
@@ -65,12 +85,13 @@ export default function SearchBar(props) {
             variant="success"
             title="Food Categories"
             id="input-group-dropdown-1"
+            // onClick={() => setDropdown(true)}
           >
             <Dropdown.Item
               //maybe it's {menu} or selecteditem is a piece of state
               value="menu"
               href="#"
-              // onclick={filterMenuItems}
+              onclick={() => filterMenuItems("menu")}
             >
               Menu
             </Dropdown.Item>
@@ -79,6 +100,7 @@ export default function SearchBar(props) {
             <Dropdown.Item href="#">Alcohol</Dropdown.Item>
           </DropdownButton>
           <Form.Label className="search-inner">
+            {/* {dropdown && ( */}
             <Form.Control
               size="lg"
               type="text"
@@ -87,6 +109,7 @@ export default function SearchBar(props) {
               value={inputValue}
               onChange={handleChange}
             />
+            {/* )} */}
           </Form.Label>
         </InputGroup>
 

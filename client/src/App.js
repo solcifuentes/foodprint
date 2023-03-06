@@ -20,9 +20,9 @@ function App() {
   const [condItems, setCondItems] = useState([]);
   const [randomItems, setRandomItems] = useState([]);
 
-  console.log("condition items:", condItems);
-  console.log("random items:", randomItems);
-  console.log("food emission obj:", foodEmis);
+  // console.log("condition items:", condItems);
+  // console.log("random items:", randomItems);
+  // console.log("food emission obj:", foodEmis);
 
   useEffect(() => {
     selectRandomItems();
