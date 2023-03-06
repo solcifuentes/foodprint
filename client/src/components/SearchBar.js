@@ -12,30 +12,8 @@ export default function SearchBar(props) {
   const [selectedFoodObj, setSelectedFoodObj] = useState(null);
   const [active, setActive] = useState(true);
   const [inputDisabled, setInputDisabled] = useState(true);
-  //   const [dropdown, setDropdown] = useState(false);
-
-  // DICTIONARY
-  const dictionary = {
-    MENU_des: "deserts",
-    MENU_fish: "fish options",
-    MENU_meat: "meat options",
-    MENU_veg: "vegan/vegetarian options",
-    DIY_bf: "breakfast ingredients",
-    DIY_bread: "bread",
-    DIY_chee: "cheeses",
-    DIY_eggs: "eggs",
-    DIY_fat: "oils, fats etc.",
-    DIY_fish: "fish",
-    DIY_fruit: "fruits",
-    DIY_meat: "meat",
-    DIY_nut: "nuts & seeds",
-    DIY_pasta: "pasta & rice",
-    DIY_plantb: "vegan/vegetarian alternatives",
-    DIY_swee: "sweets & snacks",
-    DIY_veg: "vegetables & legumes",
-    BEV: "beverages",
-    ALC: "alcoholic drinks",
-  };
+  const [menuTitle, setMenuTitle] = useState("");
+  const [buttonTitle, setButtonTitle] = useState("Food categories");
 
   //HANDLE INPUT VALUE
   const handleChange = (event) => {
@@ -57,39 +35,30 @@ export default function SearchBar(props) {
     setInputValue(searchTerm);
   };
 
-  const [menuTitle, setMenuTitle] = useState("Food categories");
-
   //FILTER CAT ITEMS
   const filterCatItems = (query) => {
     setMenuTitle(query);
+    // const dictionary = {
+    //   menu: "Menu",
+    //   diy: "Ingredients",
+    //   bev: "Drinks",
+    //   alc: "Alcohol",
+    // };
+    if (query === "menu") {
+      setButtonTitle("Menu");
+    }
+    if (query === "diy") {
+      setButtonTitle("Ingredients");
+    }
+    if (query === "bev") {
+      setButtonTitle("Drinks");
+    }
+    if (query === "alc") {
+      setButtonTitle("Alcohol");
+    }
+
     setInputDisabled(false);
   };
-
-  //PRINT CATEGORY MESSAGE
-  //   const printCatMessage = (query) => {
-  //     if (query === "menu") {
-  //       const menuMessage = `I'm lazy today,
-  //         &emsp;&emsp;&emsp;show me the ${query}!`;
-  //       console.log(menuMessage);
-  //     }
-  //     if (query === "diy") {
-  //       const diyMessage = `I'm going DIY, these
-  //         &emsp;&emsp;&emsp; are my ingredients`;
-  //       console.log(diyMessage);
-  //     }
-  //     if (query === "bev") {
-  //       const bevMessage = `I'm thirsty, as well!
-  //         &emsp;&emsp;&emsp;&emsp. Any drinks?`;
-  //       console.log(bevMessage);
-  //     }
-  //     if (query === "alc") {
-  //       const alcMessage = `Cheers, <em>salud</em>, santé, <br />
-  //       &emsp;&emsp;&emsp;&emsp;<nobr>skol, chin-chin!</nobr>`;
-  //       console.log(alcMessage);
-  //     }
-  //   };
-
-  //   const titles = [];
 
   const filteredItems = useMemo(
     () =>
@@ -115,10 +84,10 @@ export default function SearchBar(props) {
         <InputGroup size="m" className="mb-3">
           <DropdownButton
             variant="success"
-            title={menuTitle}
+            title={buttonTitle}
             id="input-group-dropdown-1"
           >
-            <Dropdown.Item value="Menu" onClick={() => filterCatItems("menu")}>
+            <Dropdown.Item value="menu" onClick={() => filterCatItems("menu")}>
               Menu
             </Dropdown.Item>
             <Dropdown.Item
@@ -127,13 +96,10 @@ export default function SearchBar(props) {
             >
               Ingredients
             </Dropdown.Item>
-            <Dropdown.Item value="Drinks" onClick={() => filterCatItems("bev")}>
+            <Dropdown.Item value="bev" onClick={() => filterCatItems("bev")}>
               Drinks
             </Dropdown.Item>
-            <Dropdown.Item
-              value="Alcohol"
-              onClick={() => filterCatItems("alc")}
-            >
+            <Dropdown.Item value="alc" onClick={() => filterCatItems("alc")}>
               Alcohol
             </Dropdown.Item>
           </DropdownButton>
