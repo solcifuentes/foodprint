@@ -32,9 +32,26 @@ export default function SearchBar(props) {
   };
 
   //   const filterMenuItems = () => {
+
+  //   filterCats(props.foodCats, "diy").map((cat) => (
+  //       <li key={cat.food_cat}>
+  //         <Link
+  //           to={cat.food_cat}
+  //           style={{
+  //             textDecoration: "none",
+  //             color: "#1c5253",
+  //             fontWeight: "bold",
+  //           }}
+  //         >
+  //           {dictionary[cat.food_cat]}
+  //         </Link>
+  //       </li>
+  //     ))
+
   //     foodEmis
 
   //   }
+
   return (
     <div>
       <Form
