@@ -12,6 +12,7 @@ export default function SearchBar(props) {
   const [selectedFoodObj, setSelectedFoodObj] = useState(null);
   const [active, setActive] = useState(true);
   const [dropdown, setDropdown] = useState(false);
+  //   console.log(foodEmis);
 
   // DICTIONARY
   const dictionary = {
@@ -55,23 +56,38 @@ export default function SearchBar(props) {
     setInputValue(searchTerm);
   };
 
-  //FILTER CATS
-  //   function filterCats(arr, query) {
-  //     return arr.filter((cat) =>
-  //       cat.food_cat.toLowerCase().includes(query.toLowerCase())
-  //     );
-  //   }
-
-  //FILTER MENU ITEMS
-  const filterMenuItems = (query) => {
-    const menuItems = foodEmis.foodCats.filter((cat) =>
+  //FILTER CAT ITEMS
+  const filterCatItems = (query) => {
+    const catItems = foodEmis.filter((cat) =>
       cat.food_cat.toLowerCase().includes(query.toLowerCase())
     );
-    return menuItems;
+    console.log(catItems);
+    printCatMessage(query);
+    return catItems;
+  };
 
-    // filterCats(foodEmis.foodCats, "menu").map((cat) => (
-    //     <li key={cat.food_cat}>{dictionary[cat.food_cat]}</li>
-    //   ));
+  //PRINT CATEGORY MESSAGE
+  const printCatMessage = (query) => {
+    if (query === "menu") {
+      const menuMessage = `I'm lazy today, 
+        &emsp;&emsp;&emsp;show me the ${query}!`;
+      console.log(menuMessage);
+    }
+    if (query === "diy") {
+      const diyMessage = `I'm going DIY, these
+        &emsp;&emsp;&emsp; are my ingredients`;
+      console.log(diyMessage);
+    }
+    if (query === "bev") {
+      const bevMessage = `I'm thirsty, as well!
+        &emsp;&emsp;&emsp;&emsp. Any drinks?`;
+      console.log(bevMessage);
+    }
+    if (query === "alc") {
+      const alcMessage = `Cheers, <em>salud</em>, santé, <br />
+      &emsp;&emsp;&emsp;&emsp;<nobr>skol, chin-chin!</nobr>`;
+      console.log(alcMessage);
+    }
   };
 
   return (
@@ -90,14 +106,19 @@ export default function SearchBar(props) {
             <Dropdown.Item
               //maybe it's {menu} or selecteditem is a piece of state
               value="menu"
-              href="#"
-              onclick={() => filterMenuItems("menu")}
+              onClick={() => filterCatItems("menu")}
             >
               Menu
             </Dropdown.Item>
-            <Dropdown.Item href="#">Ingredients</Dropdown.Item>
-            <Dropdown.Item href="#">Drinks</Dropdown.Item>
-            <Dropdown.Item href="#">Alcohol</Dropdown.Item>
+            <Dropdown.Item value="diy" onClick={() => filterCatItems("diy")}>
+              Ingredients
+            </Dropdown.Item>
+            <Dropdown.Item value="bev" onClick={() => filterCatItems("bev")}>
+              Drinks
+            </Dropdown.Item>
+            <Dropdown.Item value="alc" onClick={() => filterCatItems("alc")}>
+              Alcohol
+            </Dropdown.Item>
           </DropdownButton>
           <Form.Label className="search-inner">
             {/* {dropdown && ( */}
@@ -140,6 +161,8 @@ export default function SearchBar(props) {
           Search{" "}
         </Button>
       </Form>
+
+      <div>{}</div>
     </div>
   );
 }
