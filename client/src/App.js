@@ -12,13 +12,17 @@ import SearchBar from "./components/SearchBar";
 import Api from "./Api.js";
 
 function App() {
-  //my state
+  //Properties of the object
   const [foodEmis, setFoodEmis] = useState([]);
   const [foodCats, setFoodCats] = useState([]);
   const [foodprint, setFoodprint] = useState(0);
   const [selection, setSelection] = useState([]);
   const [condItems, setCondItems] = useState([]);
   const [randomItems, setRandomItems] = useState([]);
+
+  console.log("condition items:", condItems);
+  console.log("random items:", randomItems);
+  console.log("food emission obj:", foodEmis);
 
   useEffect(() => {
     selectRandomItems();
@@ -114,6 +118,11 @@ function App() {
               foodEmis={foodEmis}
               handleIncrementCb={(value) => handleIncrement(value)}
               showSelectionCb={(item) => showSelection(item)}
+            />
+            <CatView
+              foodCats={foodCats}
+              foodprint={foodprint}
+              randomItems={randomItems}
             />
             {/* <Button onClick={reset} variant="success"> */}
             {/* <Link
