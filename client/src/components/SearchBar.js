@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Form from "react-bootstrap/Form";
@@ -8,11 +8,11 @@ import "./SearchBar.css";
 
 export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
-  const { foodEmis, handleIncrementCb, showSelectionCb } = props;
+  const { foodEmis, setFoodCats, handleIncrementCb, showSelectionCb } = props;
   const [selectedFoodObj, setSelectedFoodObj] = useState(null);
   const [active, setActive] = useState(true);
-  const [dropdown, setDropdown] = useState(false);
-  //   console.log(foodEmis);
+  const [inputDisabled, setInputDisabled] = useState(true);
+  //   const [dropdown, setDropdown] = useState(false);
 
   // DICTIONARY
   const dictionary = {
@@ -43,6 +43,7 @@ export default function SearchBar(props) {
   };
 
   //HANDLE SUBMIT
+  //error handling
   const handleSubmit = (event) => {
     event.preventDefault();
     handleIncrementCb(selectedFoodObj.emi_port);
@@ -56,39 +57,54 @@ export default function SearchBar(props) {
     setInputValue(searchTerm);
   };
 
+  const [menuTitle, setMenuTitle] = useState("Food categories");
+
   //FILTER CAT ITEMS
   const filterCatItems = (query) => {
-    const catItems = foodEmis.filter((cat) =>
-      cat.food_cat.toLowerCase().includes(query.toLowerCase())
-    );
-    console.log(catItems);
-    printCatMessage(query);
-    return catItems;
+    setMenuTitle(query);
+    setInputDisabled(false);
   };
 
   //PRINT CATEGORY MESSAGE
-  const printCatMessage = (query) => {
-    if (query === "menu") {
-      const menuMessage = `I'm lazy today, 
-        &emsp;&emsp;&emsp;show me the ${query}!`;
-      console.log(menuMessage);
-    }
-    if (query === "diy") {
-      const diyMessage = `I'm going DIY, these
-        &emsp;&emsp;&emsp; are my ingredients`;
-      console.log(diyMessage);
-    }
-    if (query === "bev") {
-      const bevMessage = `I'm thirsty, as well!
-        &emsp;&emsp;&emsp;&emsp. Any drinks?`;
-      console.log(bevMessage);
-    }
-    if (query === "alc") {
-      const alcMessage = `Cheers, <em>salud</em>, santé, <br />
-      &emsp;&emsp;&emsp;&emsp;<nobr>skol, chin-chin!</nobr>`;
-      console.log(alcMessage);
-    }
-  };
+  //   const printCatMessage = (query) => {
+  //     if (query === "menu") {
+  //       const menuMessage = `I'm lazy today,
+  //         &emsp;&emsp;&emsp;show me the ${query}!`;
+  //       console.log(menuMessage);
+  //     }
+  //     if (query === "diy") {
+  //       const diyMessage = `I'm going DIY, these
+  //         &emsp;&emsp;&emsp; are my ingredients`;
+  //       console.log(diyMessage);
+  //     }
+  //     if (query === "bev") {
+  //       const bevMessage = `I'm thirsty, as well!
+  //         &emsp;&emsp;&emsp;&emsp. Any drinks?`;
+  //       console.log(bevMessage);
+  //     }
+  //     if (query === "alc") {
+  //       const alcMessage = `Cheers, <em>salud</em>, santé, <br />
+  //       &emsp;&emsp;&emsp;&emsp;<nobr>skol, chin-chin!</nobr>`;
+  //       console.log(alcMessage);
+  //     }
+  //   };
+
+  //   const titles = [];
+
+  const filteredItems = useMemo(
+    () =>
+      foodEmis
+        .filter((cat) =>
+          cat.food_cat.toLowerCase().includes(menuTitle.toLowerCase())
+        )
+        .filter((item) => {
+          const searchTerm = inputValue.toLowerCase();
+          const foodLowerCase = item.food_item.toLowerCase();
+          return searchTerm && foodLowerCase.startsWith(searchTerm);
+        })
+        .slice(0, 10),
+    [menuTitle, inputValue, foodEmis]
+  );
 
   return (
     <div>
@@ -99,29 +115,29 @@ export default function SearchBar(props) {
         <InputGroup size="m" className="mb-3">
           <DropdownButton
             variant="success"
-            title="Food Categories"
+            title={menuTitle}
             id="input-group-dropdown-1"
-            // onClick={() => setDropdown(true)}
           >
-            <Dropdown.Item
-              //maybe it's {menu} or selecteditem is a piece of state
-              value="menu"
-              onClick={() => filterCatItems("menu")}
-            >
+            <Dropdown.Item value="Menu" onClick={() => filterCatItems("menu")}>
               Menu
             </Dropdown.Item>
-            <Dropdown.Item value="diy" onClick={() => filterCatItems("diy")}>
+            <Dropdown.Item
+              value="Ingredients"
+              onClick={() => filterCatItems("diy")}
+            >
               Ingredients
             </Dropdown.Item>
-            <Dropdown.Item value="bev" onClick={() => filterCatItems("bev")}>
+            <Dropdown.Item value="Drinks" onClick={() => filterCatItems("bev")}>
               Drinks
             </Dropdown.Item>
-            <Dropdown.Item value="alc" onClick={() => filterCatItems("alc")}>
+            <Dropdown.Item
+              value="Alcohol"
+              onClick={() => filterCatItems("alc")}
+            >
               Alcohol
             </Dropdown.Item>
           </DropdownButton>
           <Form.Label className="search-inner">
-            {/* {dropdown && ( */}
             <Form.Control
               size="lg"
               type="text"
@@ -129,32 +145,25 @@ export default function SearchBar(props) {
               placeholder="Find your food..."
               value={inputValue}
               onChange={handleChange}
+              disabled={inputDisabled}
             />
-            {/* )} */}
           </Form.Label>
         </InputGroup>
 
         <div className="dropdown">
-          {foodEmis
-            .filter((item) => {
-              const searchTerm = inputValue.toLowerCase();
-              const foodLowerCase = item.food_item.toLowerCase();
-              return searchTerm && foodLowerCase.startsWith(searchTerm);
-            })
-            .slice(0, 10)
-            .map((item) => (
-              <div
-                key={item.id}
-                className="dropdown-row"
-                onClick={() => {
-                  onSearch(item.food_item);
-                  setSelectedFoodObj(item);
-                  setActive(false);
-                }}
-              >
-                {active && item.food_item}
-              </div>
-            ))}
+          {filteredItems.map((item) => (
+            <div
+              key={item.id}
+              className="dropdown-row"
+              onClick={() => {
+                onSearch(item.food_item);
+                setSelectedFoodObj(item);
+                setActive(false);
+              }}
+            >
+              {active && item.food_item}
+            </div>
+          ))}
         </div>
         <Button className="search-button" type="submit" variant="success">
           {" "}
@@ -162,7 +171,35 @@ export default function SearchBar(props) {
         </Button>
       </Form>
 
-      <div>{}</div>
+      <div>
+        {menuTitle === "menu" && (
+          <p>
+            I'm lazy today, <br />
+            &emsp;&emsp;&emsp;show me the <em>menu</em>!
+          </p>
+        )}
+        {menuTitle === "diy" && (
+          <p>
+            I'm going DIY, these
+            <br />
+            &emsp;&emsp;&emsp; are my <em>ingredients</em>
+          </p>
+        )}
+        {menuTitle === "bev" && (
+          <p>
+            I'm thirsty, as well! <br />
+            &emsp;&emsp;&emsp;&emsp;Any <em>drinks</em>?
+          </p>
+        )}
+        {menuTitle === "alc" && (
+          <p>
+            Cheers, <em>salud</em>, santé, <br />
+            &emsp;&emsp;&emsp;&emsp;
+            <nobr />
+            skol, chin-chin!
+          </p>
+        )}
+      </div>
     </div>
   );
 }

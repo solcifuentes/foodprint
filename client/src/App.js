@@ -14,7 +14,7 @@ import Api from "./Api.js";
 function App() {
   //Properties of the object
   const [foodEmis, setFoodEmis] = useState([]);
-  const [foodCats, setFoodCats] = useState([]);
+  const [foodCats, setFoodCats] = useState("");
   const [foodprint, setFoodprint] = useState(0);
   const [selection, setSelection] = useState([]);
   const [condItems, setCondItems] = useState([]);
@@ -116,6 +116,7 @@ function App() {
           <Col>
             <SearchBar
               foodEmis={foodEmis}
+              setFoodCats={setFoodCats}
               handleIncrementCb={(value) => handleIncrement(value)}
               showSelectionCb={(item) => showSelection(item)}
             />
@@ -159,7 +160,7 @@ function App() {
           </Col>
           <Col>
             <CatView
-              foodCats={foodCats}
+              // foodCats={foodCats}
               foodprint={foodprint}
               randomItems={randomItems}
             />
