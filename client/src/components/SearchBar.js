@@ -8,12 +8,14 @@ import "./SearchBar.css";
 
 export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
-  const { foodEmis, setFoodCats, handleIncrementCb, showSelectionCb } = props;
+  const { foodEmis, handleIncrementCb, showSelectionCb, selectedFoods } = props;
   const [selectedFoodObj, setSelectedFoodObj] = useState(null);
-  const [active, setActive] = useState(true);
+  const [listActive, setListActive] = useState(true);
   const [inputDisabled, setInputDisabled] = useState(true);
   const [menuTitle, setMenuTitle] = useState("");
   const [buttonTitle, setButtonTitle] = useState("Food categories");
+  //new line
+  // const [filteredItems, setFilteredItems] = useState("");
 
   //HANDLE INPUT VALUE
   const handleChange = (event) => {
@@ -24,10 +26,10 @@ export default function SearchBar(props) {
   //error handling
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(selectedFoodObj);
     handleIncrementCb(selectedFoodObj.emi_port);
-    showSelectionCb(selectedFoodObj.food_item);
-    setInputValue("");
-    setSelectedFoodObj(null);
+    showSelectionCb(selectedFoodObj);
+    reset();
   };
 
   //COMPLETE THE SEARCH BAR
@@ -35,15 +37,15 @@ export default function SearchBar(props) {
     setInputValue(searchTerm);
   };
 
-  //FILTER CAT ITEMS
+  //RESET ALL PARAMETERS
+  function reset() {
+    setInputValue("");
+    setSelectedFoodObj(null);
+    // setInputDisabled(true);
+  }
+  //FILTER CAT ITEMS & CHANGE BUTTON TITLE
   const filterCatItems = (query) => {
     setMenuTitle(query);
-    // const dictionary = {
-    //   menu: "Menu",
-    //   diy: "Ingredients",
-    //   bev: "Drinks",
-    //   alc: "Alcohol",
-    // };
     if (query === "menu") {
       setButtonTitle("Menu");
     }
@@ -56,7 +58,6 @@ export default function SearchBar(props) {
     if (query === "alc") {
       setButtonTitle("Alcohol");
     }
-
     setInputDisabled(false);
   };
 
@@ -69,18 +70,20 @@ export default function SearchBar(props) {
         .filter((item) => {
           const searchTerm = inputValue.toLowerCase();
           const foodLowerCase = item.food_item.toLowerCase();
-          return searchTerm && foodLowerCase.startsWith(searchTerm);
+          const isAlreadySelected = selectedFoods.includes(item.food_item);
+          return (
+            searchTerm &&
+            !isAlreadySelected &&
+            foodLowerCase.startsWith(searchTerm)
+          );
         })
         .slice(0, 10),
-    [menuTitle, inputValue, foodEmis]
+    [menuTitle, inputValue, foodEmis, selectedFoods]
   );
 
   return (
     <div>
-      <Form
-        className="search-container"
-        onSubmit={(event) => handleSubmit(event)}
-      >
+      <Form className="search-container" onSubmit={handleSubmit}>
         <InputGroup size="m" className="mb-3">
           <DropdownButton
             variant="success"
@@ -112,6 +115,11 @@ export default function SearchBar(props) {
               value={inputValue}
               onChange={handleChange}
               disabled={inputDisabled}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                }
+              }}
             />
           </Form.Label>
         </InputGroup>
@@ -124,16 +132,14 @@ export default function SearchBar(props) {
               onClick={() => {
                 onSearch(item.food_item);
                 setSelectedFoodObj(item);
-                setActive(false);
               }}
             >
-              {active && item.food_item}
+              {item.food_item}
             </div>
           ))}
         </div>
         <Button className="search-button" type="submit" variant="success">
-          {" "}
-          Search{" "}
+          Add to my plate
         </Button>
       </Form>
 

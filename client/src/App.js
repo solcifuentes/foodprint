@@ -116,9 +116,9 @@ function App() {
           <Col>
             <SearchBar
               foodEmis={foodEmis}
-              setFoodCats={setFoodCats}
               handleIncrementCb={(value) => handleIncrement(value)}
               showSelectionCb={(item) => showSelection(item)}
+              selectedFoods={selection}
             />
 
             {/* <Button onClick={reset} variant="success"> */}
@@ -140,8 +140,8 @@ function App() {
             <p style={{ fontWeight: 600 }}>What's on your plate?</p>
             <ul>
               {selection.map((item) => (
-                <li key={item} style={{ color: "blueviolet" }}>
-                  {item}
+                <li key={item.id} style={{ color: "blueviolet" }}>
+                  {item.food_item}
                 </li>
               ))}
             </ul>
@@ -164,29 +164,6 @@ function App() {
               foodprint={foodprint}
               randomItems={randomItems}
             />
-            {/* <Routes>
-              <Route
-                path="/cats/:active?"
-                element={
-                  <CatView
-                    foodCats={foodCats}
-                    foodprint={foodprint}
-                    randomItems={randomItems}
-                  />
-                }
-              >
-                <Route
-                  path=":key"
-                  element={
-                    <ItemsView
-                      foodEmis={foodEmis}
-                      handleIncrementCb={(value) => handleIncrement(value)}
-                      showSelectionCb={(item) => showSelection(item)}
-                    />
-                  }
-                />
-              </Route>
-            </Routes> */}
           </Col>
         </Row>
       </div>

@@ -137,3 +137,25 @@
             </Row>
           </Col> */
 }
+
+// const dictionary = {
+//   MENU_des: "deserts",
+//   MENU_fish: "fish options",
+//   MENU_meat: "meat options",
+//   MENU_veg: "vegan/vegetarian options",
+//   DIY_bf: "breakfast ingredients",
+//   DIY_bread: "bread",
+//   DIY_chee: "cheeses",
+//   DIY_eggs: "eggs",
+//   DIY_fat: "oils, fats etc.",
+//   DIY_fish: "fish",
+//   DIY_fruit: "fruits",
+//   DIY_meat: "meat",
+//   DIY_nut: "nuts & seeds",
+//   DIY_pasta: "pasta & rice",
+//   DIY_plantb: "vegan/vegetarian alternatives",
+//   DIY_swee: "sweets & snacks",
+//   DIY_veg: "vegetables & legumes",
+//   BEV: "beverages",
+//   ALC: "alcoholic drinks"
+// }
