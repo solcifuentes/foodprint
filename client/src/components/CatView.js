@@ -49,7 +49,6 @@ export default function CatView(props) {
     <Container className="CatView">
       <Row>
         <Col sm={12} md={6}>
-          {/* esto necesito conservarlo */}
           {props.foodprint > 0.5 && (
             <div>
               <p className="warning">

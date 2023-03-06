@@ -119,11 +119,7 @@ function App() {
               handleIncrementCb={(value) => handleIncrement(value)}
               showSelectionCb={(item) => showSelection(item)}
             />
-            <CatView
-              foodCats={foodCats}
-              foodprint={foodprint}
-              randomItems={randomItems}
-            />
+
             {/* <Button onClick={reset} variant="success"> */}
             {/* <Link
                 to="/cats"
@@ -162,6 +158,11 @@ function App() {
             </Button>
           </Col>
           <Col>
+            <CatView
+              foodCats={foodCats}
+              foodprint={foodprint}
+              randomItems={randomItems}
+            />
             {/* <Routes>
               <Route
                 path="/cats/:active?"

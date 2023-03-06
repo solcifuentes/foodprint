@@ -10,6 +10,7 @@ export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
   const { foodEmis, handleIncrementCb, showSelectionCb } = props;
   const [selectedFoodObj, setSelectedFoodObj] = useState(null);
+  const [active, setActive] = useState(true);
 
   //HANDLE INPUT VALUE
   const handleChange = (event) => {
@@ -28,6 +29,7 @@ export default function SearchBar(props) {
   //COMPLETE THE SEARCH BAR
   const onSearch = (searchTerm) => {
     setInputValue(searchTerm);
+
     console.log("search term: ", searchTerm);
   };
 
@@ -93,11 +95,7 @@ export default function SearchBar(props) {
             .filter((item) => {
               const searchTerm = inputValue.toLowerCase();
               const foodLowerCase = item.food_item.toLowerCase();
-              return (
-                searchTerm && foodLowerCase.startsWith(searchTerm)
-                //   &&
-                //   foodLowerCase !== inputValue
-              );
+              return searchTerm && foodLowerCase.startsWith(searchTerm);
             })
             .slice(0, 10)
             .map((item) => (
@@ -107,9 +105,10 @@ export default function SearchBar(props) {
                 onClick={() => {
                   onSearch(item.food_item);
                   setSelectedFoodObj(item);
+                  setActive(false);
                 }}
               >
-                {item.food_item}
+                {active && item.food_item}
               </div>
             ))}
         </div>
