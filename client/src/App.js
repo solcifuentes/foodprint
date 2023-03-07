@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CatView from "./components/CatView";
-// import ItemsView from "./components/ItemsView";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -120,24 +119,13 @@ function App() {
               showSelectionCb={(item) => showSelection(item)}
               selectedFoods={selection}
             />
-
-            {/* <Button onClick={reset} variant="success"> */}
-            {/* <Link
-                to="/cats"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Let's get started!
-              </Link> */}
-            {/* </Button> */}
           </Col>
         </Row>
         <Row>
           <Col xs={3}>
-            <p style={{ fontWeight: 600 }}>What's on your plate?</p>
+            <p className="plate-menu" style={{ fontWeight: 600 }}>
+              What's on your plate?
+            </p>
             <ul>
               {selection.map((item) => (
                 <li key={item.id} style={{ color: "blueviolet" }}>
@@ -154,16 +142,16 @@ function App() {
               of CO2eq*.
             </p>
 
-            <Button onClick={reset} variant="outline-success">
+            <Button
+              onClick={reset}
+              variant="outline-success"
+              className="reset-button"
+            >
               Empty my plate!
             </Button>
           </Col>
           <Col>
-            <CatView
-              // foodCats={foodCats}
-              foodprint={foodprint}
-              randomItems={randomItems}
-            />
+            <CatView foodprint={foodprint} randomItems={randomItems} />
           </Col>
         </Row>
       </div>

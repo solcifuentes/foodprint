@@ -4,18 +4,17 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
+
 import "./SearchBar.css";
+import FormLabel from "react-bootstrap/esm/FormLabel";
 
 export default function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
   const { foodEmis, handleIncrementCb, showSelectionCb, selectedFoods } = props;
   const [selectedFoodObj, setSelectedFoodObj] = useState(null);
-  const [listActive, setListActive] = useState(true);
   const [inputDisabled, setInputDisabled] = useState(true);
   const [menuTitle, setMenuTitle] = useState("");
   const [buttonTitle, setButtonTitle] = useState("Food categories");
-  //new line
-  // const [filteredItems, setFilteredItems] = useState("");
 
   //HANDLE INPUT VALUE
   const handleChange = (event) => {
@@ -70,7 +69,8 @@ export default function SearchBar(props) {
         .filter((item) => {
           const searchTerm = inputValue.toLowerCase();
           const foodLowerCase = item.food_item.toLowerCase();
-          const isAlreadySelected = selectedFoods.includes(item.food_item);
+          const isAlreadySelected = selectedFoods.includes(foodLowerCase);
+
           return (
             searchTerm &&
             !isAlreadySelected &&
@@ -84,11 +84,13 @@ export default function SearchBar(props) {
   return (
     <div>
       <Form className="search-container" onSubmit={handleSubmit}>
-        <InputGroup size="m" className="mb-3">
+        <InputGroup className="mb-3">
           <DropdownButton
+            className="dropdown-button"
             variant="success"
             title={buttonTitle}
             id="input-group-dropdown-1"
+            size="lg"
           >
             <Dropdown.Item value="menu" onClick={() => filterCatItems("menu")}>
               Menu
@@ -106,8 +108,9 @@ export default function SearchBar(props) {
               Alcohol
             </Dropdown.Item>
           </DropdownButton>
-          <Form.Label className="search-inner">
+          <FormLabel>
             <Form.Control
+              className="input-field"
               size="lg"
               type="text"
               name="searchInput"
@@ -121,7 +124,7 @@ export default function SearchBar(props) {
                 }
               }}
             />
-          </Form.Label>
+          </FormLabel>
         </InputGroup>
 
         <div className="dropdown">
@@ -138,12 +141,17 @@ export default function SearchBar(props) {
             </div>
           ))}
         </div>
-        <Button className="search-button" type="submit" variant="success">
+        <Button
+          className="search-button"
+          type="submit"
+          variant="success"
+          size="lg"
+        >
           Add to my plate
         </Button>
       </Form>
 
-      <div>
+      <div className="food-message">
         {menuTitle === "menu" && (
           <p>
             I'm lazy today, <br />

@@ -26,14 +26,14 @@ export default function CatView(props) {
           {props.foodprint > 0.5 && (
             <div>
               <p className="neutral">
-                👍🏿👍🏻👍🏽&nbsp;Challenge yourself?! <br /> Mix it up with these
-                random picks, which are all low in emissions:
+                👍🏿👍🏻👍🏽&nbsp; Mix it up with these random picks, which are all
+                low in emissions:
               </p>
               <ul>
                 {props.randomItems.map((item) => (
                   <li key={item.food_item} style={{ cursor: "text" }}>
-                    Fancy {item.food_item}? Emissions are {item.emi_port}kg of
-                    CO2eq only!
+                    Fancy <strong>{item.food_item}</strong>? Emissions are{" "}
+                    {item.emi_port}kg of CO2eq only!
                   </li>
                 ))}
               </ul>
