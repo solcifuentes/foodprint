@@ -26,7 +26,7 @@ export default function CatView(props) {
           {props.foodprint > 0.5 && (
             <div>
               <p className="neutral">
-                👍🏿👍🏻👍🏽&nbsp; Mix it up with these random picks, which are all
+                👍🏿👍🏻👍🏽 &nbsp; Mix it up with these random picks, which are all
                 low in emissions:
               </p>
               <ul>

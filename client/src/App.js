@@ -9,6 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import SearchBar from "./components/SearchBar";
 import Api from "./Api.js";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
 function App() {
   //Properties of the object
@@ -18,10 +20,6 @@ function App() {
   const [selection, setSelection] = useState([]);
   const [condItems, setCondItems] = useState([]);
   const [randomItems, setRandomItems] = useState([]);
-
-  // console.log("condition items:", condItems);
-  // console.log("random items:", randomItems);
-  // console.log("food emission obj:", foodEmis);
 
   useEffect(() => {
     selectRandomItems();
@@ -72,6 +70,16 @@ function App() {
         setFoodCats={setFoodCats}
         setCondItems={setCondItems}
       />
+      {/* new navbar */}
+      {/* <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">FoodPrint</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#glossary">Glossary</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar> */}
       <div className="main">
         <Row className="center">
           <Col>
@@ -121,7 +129,7 @@ function App() {
             />
           </Col>
         </Row>
-        <Row>
+        <Row className="messages-row">
           <Col xs={3}>
             <p className="plate-menu" style={{ fontWeight: 600 }}>
               What's on your plate?
