@@ -37,7 +37,3 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Recipe suggestions (random whenever threshold is reached OR based on user choices)
 - Styling: general styling, fix in-line styling, "heavy footer"
 - Customize backend data: Make portions adjustable by the user
-
-### Search bar
-
--

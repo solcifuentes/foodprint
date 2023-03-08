@@ -74,7 +74,9 @@ export default function SearchBar(props) {
           return (
             searchTerm &&
             !isAlreadySelected &&
-            foodLowerCase.startsWith(searchTerm)
+            foodLowerCase.includes(searchTerm)
+            // ||
+            // foodLowerCase.includes(searchTerm)
           );
         })
         .slice(0, 10),
@@ -151,7 +153,7 @@ export default function SearchBar(props) {
         </Button>
       </Form>
 
-      <div className="food-message">
+      {/* <div className="food-message">
         {menuTitle === "menu" && (
           <p>
             I'm lazy today, <br />
@@ -179,7 +181,7 @@ export default function SearchBar(props) {
             skol, chin-chin!
           </p>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
